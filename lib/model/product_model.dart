@@ -14,7 +14,6 @@ class ProductModel {
         required this.category,
         required this.image,
     });
-
     factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
         id: json["id"] ?? 0,
         title: json["title"] ?? "",

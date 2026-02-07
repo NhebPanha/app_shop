@@ -1,0 +1,33 @@
+class AppFontSize {
+  const AppFontSize();
+  static double value1 = 1;
+  static double value2 = 2;
+  static double value3 = 3;
+  static double value4 = 4;
+  static double value5 = 5;
+  static double value6 = 6;
+  static double value7 = 7;
+  static double value8 = 8;
+  static double value9 = 9;
+  static double value10 = 10;
+  static double value11 = 11;
+  static double value12 = 12;
+  static double value13 = 13;
+  static double value14 = 14;
+  static double value15 = 15;
+  static double value16 = 16;
+  static double value17 = 17;
+  static double value18 = 18;
+  static double value19 = 19;
+  static double value20 = 20;
+  static double value21 = 21;
+  static double value22 = 22;
+  static double value23 = 23;
+  static double value24 = 24;
+  static double value25 = 25;
+  static double value26 = 26;
+  static double value27 = 27;
+  static double value28 = 28;
+  static double value29 = 29;
+  static double value30 = 30;
+}

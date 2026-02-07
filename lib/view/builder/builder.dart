@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/model/product_model.dart';
+import 'package:shop_app/utils/app_colors.dart';
+import 'package:shop_app/utils/app_font_size.dart';
 import 'package:shop_app/utils/applabel.dart';
 
 class HomeBuilder extends StatefulWidget {
@@ -14,47 +16,64 @@ class _HomeBuilderState extends State<HomeBuilder> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        padding: EdgeInsets.all(10),
         width: double.infinity,
         height: double.infinity,
-        color: Colors.amber,
-        child: ListView.builder(
+        child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            mainAxisExtent: 200,
+          ),
           itemCount: productModel.length,
           itemBuilder: (context, index) {
             final item = productModel[index];
             return Container(
-              margin: EdgeInsets.all(5),
-              height: 250,
               decoration: BoxDecoration(
-                color: Colors.grey.withValues(alpha: 0.7),
-                borderRadius: BorderRadius.circular(15),
+                color: AppColors.grey,
+                borderRadius: BorderRadius.circular(10),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    height: 160,
                     width: double.infinity,
+                    height: 120,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(15),
-                        topRight: Radius.circular(15),
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
                       ),
                       image: DecorationImage(
                         image: NetworkImage(item.image),
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fitWidth,
                       ),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: EdgeInsets.only(left: 10,top: 10),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        AppLabel(text: "${item!.title}", fontSize: 14),
-                        AppLabel(text: "${item!.description}", fontSize: 14),
-                        AppLabel(text: "\$${item!.price}", fontSize: 14),
+                        AppLabel(
+                          text: item.title,
+                          fontSize: AppFontSize.value12,
+                          colors: AppColors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        AppLabel(
+                          text: item.description,
+                          fontSize: AppFontSize.value15,
+                          colors: AppColors.white,
+                        ),
+                        AppLabel(
+                          text: "\$ ${item.price}",
+                          fontSize: AppFontSize.value15,
+                          colors: AppColors.red,
+                        ),
                       ],
                     ),
                   ),
@@ -67,16 +86,3 @@ class _HomeBuilderState extends State<HomeBuilder> {
     );
   }
 }
-
-
-
-// wallet = 1500$; 
-// input = 1200;
-// input < 1
-// 1$ ឡើង
-// input > 1000
-// limit 1000
-// input > wallet
-// លុយ​មិនគ្រប់
-
-
