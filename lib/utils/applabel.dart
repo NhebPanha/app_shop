@@ -7,6 +7,7 @@ class AppLabel extends StatelessWidget {
   final Color? colors;
   final TextAlign? alignment;
   final TextOverflow? textOverflow;
+  final TextDecoration? decoration;
 
   AppLabel({
     required this.text,
@@ -15,6 +16,7 @@ class AppLabel extends StatelessWidget {
     this.colors,
     this.alignment,
     this.textOverflow,
+    this.decoration,
   });
   @override
   Widget build(BuildContext context) {
@@ -24,8 +26,10 @@ class AppLabel extends StatelessWidget {
         fontSize: fontSize,
         fontWeight: fontWeight,
         color: colors,
+         decoration: decoration, 
       ),
       textAlign: alignment,
+      overflow: textOverflow,
     );
   }
 }
