@@ -1,5 +1,5 @@
+import 'dart:convert';
 import 'dart:developer';
-
 import 'package:carousel_slider_plus/carousel_slider_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_app/components/app_bar_widget.dart';
@@ -10,6 +10,7 @@ import 'package:shop_app/model/slider_model.dart';
 import 'package:shop_app/utils/app_colors.dart';
 import 'package:shop_app/utils/app_font_size.dart';
 import 'package:shop_app/utils/applabel.dart';
+import 'package:shop_app/view/detail_screen/detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -138,76 +139,97 @@ class _HomeScreenState extends State<HomeScreen> {
                           final item = productList[index];
                           return Stack(
                             children: [
-                              Container(
-                                margin: EdgeInsets.symmetric(horizontal: 5),
-                                decoration: BoxDecoration(
-                                  color: AppColors.trans,
-                                  borderRadius: BorderRadius.circular(12),
-                                  border: Border.all(
-                                    color: AppColors.grey.withValues(
-                                      alpha: 0.3,
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    ctx,
+                                    MaterialPageRoute(
+                                      builder: (ctx) => DetailScreen(
+                                        name: item.name,
+                                        image: item.image,
+                                        price: item.price,
+                                        afterdiscount: item.afterdiscount,
+                                        description: item.description,
+                                        category: item.category,
+                                        rating: item.rating,
+                                        ratingCount: item.ratingCount,
+                                        isFavorite: item.isFavorite,
+                                        images: item.images,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 5),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.trans,
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(
+                                      color: AppColors.grey.withValues(
+                                        alpha: 0.3,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      height: 150,
-                                      decoration: BoxDecoration(
-                                        color: AppColors.trans,
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(12),
-                                          topRight: Radius.circular(12),
-                                        ),
-                                        image: DecorationImage(
-                                          image: NetworkImage(item.image),
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 10,
-                                        vertical: 5,
-                                      ),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          AppLabel(
-                                            text: item.name,
-                                            fontSize: AppFontSize.value14,
-                                            colors: AppColors.black,
-                                            fontWeight: FontWeight.w700,
-                                            textOverflow: TextOverflow.clip,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        height: 150,
+                                        decoration: BoxDecoration(
+                                          color: AppColors.trans,
+                                          borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(12),
+                                            topRight: Radius.circular(12),
                                           ),
-                                          Row(
-                                            children: [
-                                              AppLabel(
-                                                text: "\$${item.afterdiscount}",
-                                                fontSize: AppFontSize.value13,
-                                                colors: AppColors.black,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                              SizedBox(width: 10),
-                                              AppLabel(
-                                                text: "\$${item.price}",
-                                                fontSize: AppFontSize.value16,
-                                                colors: AppColors.red,
-                                                fontWeight: FontWeight.w500,
-                                                decoration:
-                                                    TextDecoration.lineThrough,
-                                              ),
-                                            ],
+                                          image: DecorationImage(
+                                            image: NetworkImage(item.image),
+                                            fit: BoxFit.cover,
                                           ),
-                                        ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 10,
+                                          vertical: 5,
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            AppLabel(
+                                              text: item.name,
+                                              fontSize: AppFontSize.value14,
+                                              colors: AppColors.black,
+                                              fontWeight: FontWeight.w700,
+                                              textOverflow: TextOverflow.clip,
+                                            ),
+                                            Row(
+                                              children: [
+                                                AppLabel(
+                                                  text: "\$${item.afterdiscount}",
+                                                  fontSize: AppFontSize.value13,
+                                                  colors: AppColors.black,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                                SizedBox(width: 10),
+                                                AppLabel(
+                                                  text: "\$${item.price}",
+                                                  fontSize: AppFontSize.value16,
+                                                  colors: AppColors.red,
+                                                  fontWeight: FontWeight.w500,
+                                                  decoration:
+                                                      TextDecoration.lineThrough,
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
 

@@ -9,6 +9,7 @@ class ProductGridModel {
   final double rating;
   final int ratingCount; 
   final bool isFavorite;
+  final List<dynamic> images;
   ProductGridModel({
     required this.id,
     required this.name,
@@ -20,6 +21,7 @@ class ProductGridModel {
     required this.rating,
     required this.ratingCount,
     this.isFavorite = false, 
+    this.images = const [],
   });
 }
 
@@ -34,7 +36,10 @@ List<ProductGridModel> productList = [
     category: "Electronics",
     rating: 4.8,
     ratingCount: 120,
-    isFavorite: true
+    isFavorite: true, 
+    images: [
+      "https://i.pinimg.com/1200x/cf/7d/60/cf7d6082bb199a2e2737662ea1bea94b.jpg","https://i.pinimg.com/1200x/cf/7d/60/cf7d6082bb199a2e2737662ea1bea94b.jpg","https://i.pinimg.com/1200x/cf/7d/60/cf7d6082bb199a2e2737662ea1bea94b.jpg","https://i.pinimg.com/1200x/cf/7d/60/cf7d6082bb199a2e2737662ea1bea94b.jpg","https://i.pinimg.com/1200x/cf/7d/60/cf7d6082bb199a2e2737662ea1bea94b.jpg","https://i.pinimg.com/1200x/cf/7d/60/cf7d6082bb199a2e2737662ea1bea94b.jpg","https://i.pinimg.com/1200x/cf/7d/60/cf7d6082bb199a2e2737662ea1bea94b.jpg",
+    ],
   ),
   ProductGridModel(
     id: 2,
@@ -46,6 +51,11 @@ List<ProductGridModel> productList = [
     category: "Electronics",
     rating: 4.7,
     ratingCount: 98,
+    images: [
+      "https://i.pinimg.com/1200x/cf/7d/60/cf7d6082bb199a2e2737662ea1bea94b.jpg",
+      "https://i.pinimg.com/736x/06/70/df/0670df91bdb647db57a86e9170913dbe.jpg",
+      "https://i.pinimg.com/736x/95/96/75/95967588c8ba06d553a45185db8ed783.jpg",
+    ]
   ),
   ProductGridModel(
     id: 3,

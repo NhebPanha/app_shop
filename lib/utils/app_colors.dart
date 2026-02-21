@@ -8,4 +8,5 @@ class AppColors {
   static Color get white => const Color(0xFFFFFFFF);
   static Color get black => const Color(0xFF000000);
   static Color get redFFF => const Color(0xFFFF4242);
+  static Color get pink => const Color(0xFFFA6767);
 }
