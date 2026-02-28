@@ -38,6 +38,7 @@ dependencies:
   flutter_svg: ^2.2.3
   carousel_slider_plus: ^7.1.1
   coupon_uikit: ^0.2.1
+  provider: ^6.1.5+1
 
 dev_dependencies:
   flutter_test:

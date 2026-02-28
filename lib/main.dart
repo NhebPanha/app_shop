@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shop_app/data/logic/provider/counter.dart';
 import 'package:shop_app/view/home_screen.dart';
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+      create: (_) => Counter(),
+      child: const MyApp(),
+    ),);
 }
 
 class MyApp extends StatelessWidget {

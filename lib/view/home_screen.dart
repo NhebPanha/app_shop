@@ -2,11 +2,13 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:carousel_slider_plus/carousel_slider_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shop_app/components/app_bar_widget.dart';
 import 'package:shop_app/components/app_search_widget.dart';
-import 'package:shop_app/model/filter_list_model.dart';
-import 'package:shop_app/model/product_grid_model.dart';
-import 'package:shop_app/model/slider_model.dart';
+import 'package:shop_app/data/logic/provider/counter.dart';
+import 'package:shop_app/data/model/filter_list_model.dart';
+import 'package:shop_app/data/model/product_grid_model.dart';
+import 'package:shop_app/data/model/slider_model.dart';
 import 'package:shop_app/utils/app_colors.dart';
 import 'package:shop_app/utils/app_font_size.dart';
 import 'package:shop_app/utils/applabel.dart';
@@ -23,6 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
   TextEditingController search = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final counter = context.watch<Counter>();
+
     return Scaffold(
       backgroundColor: AppColors.black,
       body: Column(
@@ -155,6 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ratingCount: item.ratingCount,
                                         isFavorite: item.isFavorite,
                                         images: item.images,
+                                        index: index,
                                       ),
                                     ),
                                   );
@@ -172,7 +177,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Container(
                                         height: 150,
@@ -209,7 +215,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                             Row(
                                               children: [
                                                 AppLabel(
-                                                  text: "\$${item.afterdiscount}",
+                                                  text:
+                                                      "\$${item.afterdiscount}",
                                                   fontSize: AppFontSize.value13,
                                                   colors: AppColors.black,
                                                   fontWeight: FontWeight.w500,
@@ -220,8 +227,76 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   fontSize: AppFontSize.value16,
                                                   colors: AppColors.red,
                                                   fontWeight: FontWeight.w500,
-                                                  decoration:
-                                                      TextDecoration.lineThrough,
+                                                  decoration: TextDecoration
+                                                      .lineThrough,
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                InkWell(
+                                                  onTap: () {
+                                                    context
+                                                        .read<Counter>()
+                                                        .decrement(index);
+                                                  },
+                                                  child: Container(
+                                                    width: 25,
+                                                    height: 25,
+                                                    decoration: BoxDecoration(
+                                                      color: AppColors.grey
+                                                          .withValues(
+                                                            alpha: 0.3,
+                                                          ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                            12,
+                                                          ),
+                                                    ),
+                                                    child: Icon(
+                                                      Icons.remove,
+                                                      size: 18,
+                                                    ),
+                                                  ),
+                                                ),
+
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.symmetric(
+                                                        horizontal: 8,
+                                                      ),
+                                                  child: AppLabel(
+                                                    text:
+                                                        "${counter.getCount(index) >= 1 && counter.getCount(index) < 10  ? "0${counter.getCount(index)}" : "${counter.getCount(index)==0?"0":"${counter.getCount(index)}"}"}",
+                                                    fontSize:
+                                                        AppFontSize.value16,
+                                                  ),
+                                                ),
+
+                                                InkWell(
+                                                  onTap: () {
+                                                    context
+                                                        .read<Counter>()
+                                                        .increment(index);
+                                                  },
+                                                  child: Container(
+                                                    width: 24,
+                                                    height: 24,
+                                                    decoration: BoxDecoration(
+                                                      color: AppColors.grey
+                                                          .withValues(
+                                                            alpha: 0.3,
+                                                          ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                            12,
+                                                          ),
+                                                    ),
+                                                    child: Icon(
+                                                      Icons.add,
+                                                      size: 18,
+                                                    ),
+                                                  ),
                                                 ),
                                               ],
                                             ),

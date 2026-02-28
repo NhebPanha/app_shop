@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shop_app/data/logic/provider/counter.dart';
 import 'package:shop_app/utils/app_colors.dart';
 import 'package:shop_app/utils/app_font_size.dart';
 import 'package:shop_app/utils/applabel.dart';
 
 class DetailScreen extends StatefulWidget {
+  final int index;
   final String name;
   final String image;
   final dynamic price;
@@ -16,6 +19,7 @@ class DetailScreen extends StatefulWidget {
   final List<dynamic> images;
   DetailScreen({
     super.key,
+    required this.index,
     required this.name,
     required this.image,
     required this.price,
@@ -36,6 +40,7 @@ class _DetailScreenState extends State<DetailScreen> {
   int selectIndex = 0;
   @override
   Widget build(BuildContext context) {
+    final counter = context.watch<Counter>();
     return Scaffold(
       appBar: AppBar(title: Text('Detail Screen')),
       body: Padding(
@@ -132,7 +137,32 @@ class _DetailScreenState extends State<DetailScreen> {
               fontSize: AppFontSize.value12,
               colors: AppColors.black.withValues(alpha: 0.5),
             ),
-            SizedBox(height: 30,),
+            SizedBox(height: 30),
+            Row(
+              children: [
+                InkWell(
+                  onTap: () {
+                    context.read<Counter>().decrement(widget.index);
+                  },
+                  child: Icon(Icons.remove),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Text(
+                    '${counter.getCount(widget.index)}',
+                    style: const TextStyle(fontSize: 18),
+                  ),
+                ),
+
+                InkWell(
+                  onTap: () {
+                    context.read<Counter>().increment(widget.index);
+                  },
+                  child: Icon(Icons.add),
+                ),
+              ],
+            ),
             Row(
               children: [
                 AppLabel(
@@ -168,7 +198,11 @@ class _DetailScreenState extends State<DetailScreen> {
                           fontWeight: FontWeight.w500,
                           colors: AppColors.white,
                         ),
-                        Icon(Icons.arrow_forward_ios, color: AppColors.white, size: 12),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          color: AppColors.white,
+                          size: 12,
+                        ),
                       ],
                     ),
                   ),
